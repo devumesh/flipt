@@ -1171,6 +1171,33 @@ func (x *FliptClient) DeleteConstraint(ctx context.Context, v *flipt.DeleteConst
 	return &output, nil
 }
 
+func (x *FliptClient) DeleteAllContents(ctx context.Context, v *flipt.DeleteAllContentsRequest, _ ...grpc.CallOption) (*emptypb.Empty, error) {
+	var body io.Reader
+	var values url.Values
+	req, err := http.NewRequestWithContext(ctx, http.MethodDelete, x.addr+"/api/v1/contents/all", body)
+	if err != nil {
+		return nil, err
+	}
+	req.URL.RawQuery = values.Encode()
+	resp, err := x.client.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	var output emptypb.Empty
+	respData, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	if err := checkResponse(resp, respData); err != nil {
+		return nil, err
+	}
+	if err := (protojson.UnmarshalOptions{DiscardUnknown: true}).Unmarshal(respData, &output); err != nil {
+		return nil, err
+	}
+	return &output, nil
+}
+
 func (t Transport) FliptClient() flipt.FliptClient {
 	return &FliptClient{client: t.client, addr: t.addr}
 }

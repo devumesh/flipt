@@ -325,3 +325,12 @@ func (x *Flipt) DeleteConstraint(ctx context.Context, v *flipt.DeleteConstraintR
 	_, err = x.transport.DeleteConstraint(ctx, v)
 	return err
 }
+
+func (x *Flipt) DeleteAllContents(ctx context.Context, v *flipt.DeleteAllContentsRequest) error {
+	ctx, err := authenticate(ctx, x.authenticationProvider)
+	if err != nil {
+		return err
+	}
+	_, err = x.transport.DeleteAllContents(ctx, v)
+	return err
+}

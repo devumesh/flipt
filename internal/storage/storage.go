@@ -179,6 +179,7 @@ type Store interface {
 	RolloutStore
 	EvaluationStore
 	NamespaceVersionStore
+	MigrationStore
 	fmt.Stringer
 }
 
@@ -284,6 +285,11 @@ type RolloutStore interface {
 	UpdateRollout(ctx context.Context, r *flipt.UpdateRolloutRequest) (*flipt.Rollout, error)
 	DeleteRollout(ctx context.Context, r *flipt.DeleteRolloutRequest) error
 	OrderRollouts(ctx context.Context, r *flipt.OrderRolloutsRequest) error
+}
+
+// MigrationStore supports dropping and migrating the database
+type MigrationStore interface {
+	DeleteAllContents(ctx context.Context) error
 }
 
 // ListRequest is a generic container for the parameters required to perform a list operation.

@@ -499,6 +499,8 @@ message DeleteDistributionRequest {
   string namespace_key = 5;
 }
 
+message DeleteAllContentsRequest {}
+
 service Flipt {
   rpc Evaluate(EvaluationRequest) returns (EvaluationResponse) {
     option deprecated = true;
@@ -649,5 +651,9 @@ service Flipt {
   rpc DeleteConstraint(DeleteConstraintRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {delete: "/api/v1/namespaces/{namespace_key}/segments/{segment_key}/constraints/{id}"};
     option (gnostic.openapi.v3.operation) = {operation_id: "deleteConstraint" tags: ["ConstraintsService"]};
+  }
+  rpc DeleteAllContents(DeleteAllContentsRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {delete: "/api/v1/contents/all"};
+    option (gnostic.openapi.v3.operation) = {operation_id: "deleteAllContents" tags: ["FliptService"]};
   }
 }
