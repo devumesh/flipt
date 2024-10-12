@@ -499,7 +499,7 @@ message DeleteDistributionRequest {
   string namespace_key = 5;
 }
 
-message DeleteAllContentsRequest {}
+message DeleteAllNamespacesRequest {}
 
 service Flipt {
   rpc Evaluate(EvaluationRequest) returns (EvaluationResponse) {
@@ -527,6 +527,10 @@ service Flipt {
   rpc DeleteNamespace(DeleteNamespaceRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {delete: "/api/v1/namespaces/{key}"};
     option (gnostic.openapi.v3.operation) = {operation_id: "deleteNamespace" tags: ["NamespacesService"]};
+  }
+  rpc DeleteAllNamespaces(DeleteAllNamespacesRequest) returns (google.protobuf.Empty) {
+    option (google.api.http) = {delete: "/api/v1/namespaces"};
+    option (gnostic.openapi.v3.operation) = {operation_id: "deleteAllNamespaces" tags: ["NamespacesService"]};
   }
   rpc GetFlag(GetFlagRequest) returns (Flag) {
     option (google.api.http) = {get: "/api/v1/namespaces/{namespace_key}/flags/{key}"};
@@ -651,9 +655,5 @@ service Flipt {
   rpc DeleteConstraint(DeleteConstraintRequest) returns (google.protobuf.Empty) {
     option (google.api.http) = {delete: "/api/v1/namespaces/{namespace_key}/segments/{segment_key}/constraints/{id}"};
     option (gnostic.openapi.v3.operation) = {operation_id: "deleteConstraint" tags: ["ConstraintsService"]};
-  }
-  rpc DeleteAllContents(DeleteAllContentsRequest) returns (google.protobuf.Empty) {
-    option (google.api.http) = {delete: "/api/v1/contents/all"};
-    option (gnostic.openapi.v3.operation) = {operation_id: "deleteAllContents" tags: ["FliptService"]};
   }
 }

@@ -69,6 +69,15 @@ func (x *Flipt) DeleteNamespace(ctx context.Context, v *flipt.DeleteNamespaceReq
 	return err
 }
 
+func (x *Flipt) DeleteAllNamespaces(ctx context.Context, v *flipt.DeleteAllNamespacesRequest) error {
+	ctx, err := authenticate(ctx, x.authenticationProvider)
+	if err != nil {
+		return err
+	}
+	_, err = x.transport.DeleteAllNamespaces(ctx, v)
+	return err
+}
+
 func (x *Flipt) GetFlag(ctx context.Context, v *flipt.GetFlagRequest) (*flipt.Flag, error) {
 	ctx, err := authenticate(ctx, x.authenticationProvider)
 	if err != nil {
@@ -323,14 +332,5 @@ func (x *Flipt) DeleteConstraint(ctx context.Context, v *flipt.DeleteConstraintR
 		return err
 	}
 	_, err = x.transport.DeleteConstraint(ctx, v)
-	return err
-}
-
-func (x *Flipt) DeleteAllContents(ctx context.Context, v *flipt.DeleteAllContentsRequest) error {
-	ctx, err := authenticate(ctx, x.authenticationProvider)
-	if err != nil {
-		return err
-	}
-	_, err = x.transport.DeleteAllContents(ctx, v)
 	return err
 }

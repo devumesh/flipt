@@ -109,9 +109,9 @@ func (c *importCommand) run(cmd *cobra.Command, args []string) error {
 			return err
 		}
 		if c.dropBeforeImport {
-			err = client.DeleteAllContents(ctx, &flipt.DeleteAllContentsRequest{})
+			err = client.DeleteAllNamespaces(ctx, &flipt.DeleteAllNamespacesRequest{})
 			if err != nil {
-				return fmt.Errorf("dropping and migrating db: %w", err)
+				return fmt.Errorf("deleting all namespaces: %w", err)
 			}
 		}
 		return ext.NewImporter(client).Import(ctx, enc, in, c.skipExisting)

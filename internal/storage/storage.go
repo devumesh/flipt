@@ -179,7 +179,6 @@ type Store interface {
 	RolloutStore
 	EvaluationStore
 	NamespaceVersionStore
-	MigrationStore
 	fmt.Stringer
 }
 
@@ -214,6 +213,7 @@ type NamespaceStore interface {
 	CreateNamespace(ctx context.Context, r *flipt.CreateNamespaceRequest) (*flipt.Namespace, error)
 	UpdateNamespace(ctx context.Context, r *flipt.UpdateNamespaceRequest) (*flipt.Namespace, error)
 	DeleteNamespace(ctx context.Context, r *flipt.DeleteNamespaceRequest) error
+	DeleteAllNamespaces(ctx context.Context) error
 }
 
 // ReadOnlyFlagStore supports retrieval of flags
@@ -285,11 +285,6 @@ type RolloutStore interface {
 	UpdateRollout(ctx context.Context, r *flipt.UpdateRolloutRequest) (*flipt.Rollout, error)
 	DeleteRollout(ctx context.Context, r *flipt.DeleteRolloutRequest) error
 	OrderRollouts(ctx context.Context, r *flipt.OrderRolloutsRequest) error
-}
-
-// MigrationStore supports dropping and migrating the database
-type MigrationStore interface {
-	DeleteAllContents(ctx context.Context) error
 }
 
 // ListRequest is a generic container for the parameters required to perform a list operation.

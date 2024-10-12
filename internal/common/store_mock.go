@@ -243,7 +243,7 @@ func (m *StoreMock) GetEvaluationRollouts(ctx context.Context, flag storage.Reso
 	return args.Get(0).([]*storage.EvaluationRollout), args.Error(1)
 }
 
-func (m *StoreMock) DeleteAllContents(ctx context.Context) error {
+func (m *StoreMock) DeleteAllNamespaces(ctx context.Context) error {
 	args := m.Called(ctx)
 	return args.Error(0)
 }

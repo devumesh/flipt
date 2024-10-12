@@ -12,7 +12,7 @@ import (
 	"go.flipt.io/flipt/rpc/flipt"
 )
 
-func (s *DBTestSuite) TestDeleteAllContents() {
+func (s *DBTestSuite) TestDeleteAllNamespaces() {
 	t := s.T()
 	ctx := context.Background()
 
@@ -89,7 +89,7 @@ func (s *DBTestSuite) TestDeleteAllContents() {
 	})
 	require.NoError(t, err)
 
-	err = s.store.DeleteAllContents(ctx)
+	err = s.store.DeleteAllNamespaces(ctx)
 	s.NoError(err)
 
 	// check if all contents are deleted

@@ -154,6 +154,3 @@ http:
   # method: evaluation count
   - selector: flipt.analytics.AnalyticsService.GetFlagEvaluationsCount
     get: /internal/v1/analytics/namespaces/{namespace_key}/flags/{flag_key}
-  
-  - selector: flipt.Flipt.DeleteAllContents
-    delete: /internal/v1/contents/all

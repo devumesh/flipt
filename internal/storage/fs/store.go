@@ -323,6 +323,6 @@ func (s *Store) GetVersion(ctx context.Context, ns storage.NamespaceRequest) (ve
 	})
 }
 
-func (s *Store) DeleteAllContents(ctx context.Context) error {
+func (s *Store) DeleteAllNamespaces(ctx context.Context) error {
 	return ErrNotImplemented
 }
